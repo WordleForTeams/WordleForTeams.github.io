@@ -12,12 +12,23 @@ export const Keyboard = ({ onClick, usedLetters=[] }) => {
   const keyboardRow2 = 'ASDFGHJKL'
   const keyboardRow3 = 'ZXCVBNM'
 
-  const rowStyles = {display:"flex", justifyContent:"center", alignItems:"center", maxWidth:"500px"}
+  const rowStyles = {display:"flex", justifyContent:"center", alignItems:"center"}
 
   return (
+    <>
     <div style={rowStyles}>
         {keyboardRow1.split("").map((letter)=><KeyboardKey letter={letter}/>)}
     </div>
+    <div style={rowStyles}>
+        {keyboardRow2.split("").map((letter)=><KeyboardKey letter={letter}/>)}
+    </div>
+    <div style={rowStyles}>
+        {keyboardRow3.split("").map((letter)=><KeyboardKey letter={letter}/>)}
+    </div>
+    <div style={rowStyles}>
+        {['clear','enter'].map((letter)=><KeyboardKey letter={letter}/>)}
+    </div>
+    </>
   );
 };
 
@@ -29,7 +40,7 @@ export const KeyboardKey = ({onClick, state, letter}) => {
           <button
               key={letter}
               onClick={() => onClick(letter)}
-              style={{padding:"20px", fontSize:"1.6rem", fontWeight:"bold"}}
+              style={{padding:"10px", fontSize:"1.2rem", fontWeight:"bold"}}
             >
               {letter}
             </button>
