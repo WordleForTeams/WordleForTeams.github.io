@@ -57,8 +57,8 @@ function App() {
   }
 
   return (
-    <div class="App">
-    <h2>WORDLE</h2>    
+    <div className="App">
+    <h1 style={{color:"#fff", fontSize:"2.6rem", textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>WORDLE</h1>    
     {help && <Help close={()=>isHelp(!help)}/>}
     {end && <Dailog message='You Win !' word={quest}/>}
     {current>tries && !end && <Dailog message='You Loose !' word={quest}/>}
@@ -69,7 +69,7 @@ function App() {
     <Row nums={5} current={current} moveNext={moveNext} setUsed={updateUsed} quest={quest}/>
     <Row nums={6} current={current} moveNext={moveNext} setUsed={updateUsed} quest={quest}/>
     <Keyboard usedLetters={used}/>
-    <h3 style={{color: '#6264A7', cursor:"pointer"}} onClick={()=>isHelp(!help)}><u>How to Play</u></h3>
+    <h3 style={{color: '#FFF', cursor:"pointer"}} onClick={()=>isHelp(!help)}><u>How to Play</u></h3>
     </div>
   )
 

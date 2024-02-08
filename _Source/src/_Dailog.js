@@ -11,7 +11,7 @@ const buttonStyle = {
   outline: 'none',
   transition: 'background-color 0.3s ease',
   ':hover': {
-    backgroundColor: '#4fa3d1',
+    backgroundColor: '#6264A7',
   },
 };
 
