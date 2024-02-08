@@ -1,11 +1,12 @@
 import './App.css';
 import React, { useState, useEffect, useRef } from 'react';
 
-export const Row = ({nums, current, moveNext}) => {
+export const Row = ({nums, current, moveNext, setUsed, quest}) => {
 
     const [word, setWord] = useState(['', '', '', '', '']);
+    const [done, SetDone] = useState(false);
     const firstInputElement = useRef(null);
-
+    
     useEffect(() => {
         const nextIndex = getNextEmptyBoxIndex(0);
         if (nextIndex !== -1) {
@@ -33,11 +34,16 @@ export const Row = ({nums, current, moveNext}) => {
         const prevIndex = getPrevBoxIndex(index - 1);
         if (prevIndex !== -1) {
           document.getElementById(`letter-input-${nums}${prevIndex}`).focus();
-        }
+          newWord[prevIndex] = '';
+        }       
       }
       if(event.key === 'Enter') {
-        let x = getNextEmptyBoxIndex(0)
-        moveNext()
+        let length = getNextEmptyBoxIndex(0)
+        if(length==-1){
+          SetDone(true)
+          setUsed(word)
+          moveNext()
+        }        
       }
     };
   
@@ -61,7 +67,6 @@ export const Row = ({nums, current, moveNext}) => {
 
     const onRowClicked = () => {
         if(nums===current){
-            console.log(1)
             const nextIndex = getNextEmptyBoxIndex(0);
             if (nextIndex !== -1) {
             document.getElementById(`letter-input-${nums}${nextIndex}`).focus();
@@ -69,6 +74,14 @@ export const Row = ({nums, current, moveNext}) => {
         }
     }
   
+    const guess = (index) => {      
+      if (quest[index]===word[index]){
+        return 'lightgreen'
+      } 
+      if (quest.includes(word[index])) return 'yellow'
+      return 'grey'
+    }
+
     return (
       <div>
         <div className="word-container" onClick={onRowClicked}>
@@ -80,7 +93,8 @@ export const Row = ({nums, current, moveNext}) => {
               type="text"
               maxLength="1"
               value={letter}
-              style={{ pointerEvents: 'none'}}
+              style={done ? { background: guess(index)}
+                          : {}}
               onKeyDown={(e) => handleKeyDown(index, e)}
               ref={index === 0 ? firstInputElement : null}
               onChange={(e) => handleLetterChange(index, e.target.value)}

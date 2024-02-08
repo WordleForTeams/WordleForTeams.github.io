@@ -1,46 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const state = {
-    1:"used",
-    2:"not-used",
-    3:"misplaced",
-    4:"placed"
-}
-
-export const Keyboard = ({ onClick, usedLetters=[] }) => {
+export const Keyboard = ({ onClick, usedLetters}) => {
   const keyboardRow1 = 'QWERTYUIOP';
   const keyboardRow2 = 'ASDFGHJKL'
   const keyboardRow3 = 'ZXCVBNM'
 
   const rowStyles = {display:"flex", justifyContent:"center", alignItems:"center"}
 
+  const simulateKeyPress = (key) => {
+    const event = new KeyboardEvent('keydown', {
+      key: key,
+      bubbles: true,
+      cancelable: true
+    });
+  }
+
   return (
     <>
     <div style={rowStyles}>
-        {keyboardRow1.split("").map((letter)=><KeyboardKey letter={letter}/>)}
+        {keyboardRow1.split("").map((letter)=><KeyboardKey letter={letter} onClick={simulateKeyPress} col={usedLetters[letter]}/>)}
     </div>
     <div style={rowStyles}>
-        {keyboardRow2.split("").map((letter)=><KeyboardKey letter={letter}/>)}
+        {keyboardRow2.split("").map((letter)=><KeyboardKey letter={letter} onClick={simulateKeyPress} col={usedLetters[letter]}/>)}
     </div>
     <div style={rowStyles}>
-        {keyboardRow3.split("").map((letter)=><KeyboardKey letter={letter}/>)}
+        {keyboardRow3.split("").map((letter)=><KeyboardKey letter={letter} onClick={simulateKeyPress} col={usedLetters[letter]}/>)}
     </div>
-    <div style={rowStyles}>
+    {/*<div style={rowStyles}>
         {['clear','enter'].map((letter)=><KeyboardKey letter={letter}/>)}
-    </div>
+  </div>*/}
     </>
   );
 };
 
 
-export const KeyboardKey = ({onClick, state, letter}) => {
-    
+export const KeyboardKey = ({onClick, state, letter, col}) => {
+    let ss = {padding:"10px", width:"40px", fontSize:"1.2rem", fontWeight:"bold", color:"black"}
+    ss['background']=col
+    useEffect(()=>{},[col])
     return (
         <div style={{margin:"5px"}}>
           <button
               key={letter}
               onClick={() => onClick(letter)}
-              style={{padding:"10px", fontSize:"1.2rem", fontWeight:"bold"}}
+              style={ss}
             >
               {letter}
             </button>
