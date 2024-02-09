@@ -22,7 +22,7 @@ export const Row = ({nums, current, moveNext, setUsed, quest}) => {
         let length = getNextEmptyBoxIndex(0)
         if(length==4){
           SetDone(true)
-          setUsed(word)
+          setUsed(newWord)
           moveNext()
         }      
         const nextIndex = getNextEmptyBoxIndex(index + 1);
