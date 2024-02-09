@@ -16,7 +16,7 @@ export const Keyboard = ({ onClick, usedLetters}) => {
   }
 
   return (
-    <>
+    <div>
     <div style={rowStyles}>
         {keyboardRow1.split("").map((letter)=><KeyboardKey letter={letter} onClick={simulateKeyPress} col={usedLetters[letter]}/>)}
     </div>
@@ -29,7 +29,7 @@ export const Keyboard = ({ onClick, usedLetters}) => {
     {/*<div style={rowStyles}>
         {['clear','enter'].map((letter)=><KeyboardKey letter={letter}/>)}
   </div>*/}
-    </>
+    </div>
   );
 };
 

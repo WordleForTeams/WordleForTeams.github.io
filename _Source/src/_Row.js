@@ -19,10 +19,16 @@ export const Row = ({nums, current, moveNext, setUsed, quest}) => {
         const newWord = [...word];
         newWord[index] = value.toUpperCase();
         setWord(newWord);
+        let length = getNextEmptyBoxIndex(0)
+        if(length==4){
+          SetDone(true)
+          setUsed(word)
+          moveNext()
+        }      
         const nextIndex = getNextEmptyBoxIndex(index + 1);
         if (nextIndex !== -1) {
           document.getElementById(`letter-input-${nums}${nextIndex}`).focus();
-        }
+        }  
       }
     };
   
