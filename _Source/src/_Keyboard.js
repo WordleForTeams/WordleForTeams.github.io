@@ -35,12 +35,13 @@ export const Keyboard = ({ onClick, usedLetters}) => {
 
 
 export const KeyboardKey = ({onClick, state, letter, col}) => {
-    let ss = {padding:"10px", width:"40px", fontSize:"1.2rem", fontWeight:"bold", color:"black"}
+    let ss = {}
     ss['background']=col
     useEffect(()=>{},[col])
     return (
         <div style={{margin:"5px"}}>
           <button
+              className='kb'
               key={letter}
               onClick={() => onClick(letter)}
               style={ss}

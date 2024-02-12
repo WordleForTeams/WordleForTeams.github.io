@@ -5,16 +5,18 @@ import { Dailog } from './_Dailog';
 import React, { useEffect, useState } from 'react';
 import { getWord } from './words';
 import { Help } from './_Dailog';
+import * as microsoftTeams from "@microsoft/teams-js";
 
 function App() {
 
   const [current, SetCurrent] = useState(1)
+  const [randomIndex, setR] = useState(Math.random())
   const [quest, setQuest] = useState(['H','E','L','P','S'])
   const [end, setEnd] = useState(false)
   const [help, isHelp] = useState(false)
   const tries = 6
   
-  useEffect(()=>{setQuest(getWord())},[])
+  useEffect(()=>{  microsoftTeams.initialize(); setQuest(getWord(randomIndex))},[])
 
   const [used, setUsed] = useState(
     () => {
@@ -60,8 +62,8 @@ function App() {
     <div className="App">
     <h1 style={{color:"#fff", fontSize:"2.6rem", textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>WORDLE</h1>    
     {help && <Help close={()=>isHelp(!help)}/>}
-    {end && <Dailog message='You Win !' word={quest}/>}
-    {current>tries && !end && <Dailog message='You Loose !' word={quest}/>}
+    {end && <Dailog message='You Win !' m={1} word={quest}/>}
+    {current>tries && !end && <Dailog message='You Loose !' m={2} word={quest}/>}
     <Row nums={1} current={current} moveNext={moveNext} setUsed={updateUsed} quest={quest}/>
     <Row nums={2} current={current} moveNext={moveNext} setUsed={updateUsed} quest={quest}/>
     <Row nums={3} current={current} moveNext={moveNext} setUsed={updateUsed} quest={quest}/>

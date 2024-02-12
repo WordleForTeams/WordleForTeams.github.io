@@ -1,5 +1,5 @@
-export const getWord = () => {
- 
+export const getWord = (rand) => {
+     
     const wordsArray = [
         "apple", "grape", "plant", "table", "chair", "ocean", "smile", "beach", "brush", "house",
         "watch", "laugh", "peace", "bread", "music", "heart", "river", "tiger", "horse", "queen",
@@ -72,7 +72,7 @@ export const getWord = () => {
         "scold", "sheep", "scoop", "craft", "crown", "whale", "swift"
     ];
 
-    const randomIndex = Math.floor(Math.random() * wordsArray.length);
+    let randomIndex = Math.floor(rand * wordsArray.length)
     let x = wordsArray[randomIndex];
     var charArray = x.split('');
     var upperCaseArray = charArray.map(function(char) {

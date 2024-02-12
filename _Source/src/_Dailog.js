@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as microsoftTeams from "@microsoft/teams-js";
 
 const buttonStyle = {
   backgroundColor: '#6264A7',
@@ -54,7 +55,21 @@ const OverlayDialog = ({ isOpen, onClose, children }) => {
   );
 };
 
-export const Dailog = ({message, word=[]}) => {
+export const Dailog = ({message, m , word=[]}) => {
+  let xxxx = m===1 ? "I solved today`s WORDLE challenge! can you ?" : "Hey, I couldn`t solved today`s WORDLE challenge! can you ?"
+  const onK = () => {
+    const message1 = {
+      content: [
+        {
+          type: 'URL',
+          url: 'https://teams.microsoft.com/l/app/3511b122-fa63-4f0b-9299-7c4a68041390?installAppPackage=true',
+          message: xxxx,
+          preview: true
+        }
+      ]
+    };
+    microsoftTeams.sharing.shareWebContent(message1);
+  }
   return (
     <div>
       <OverlayDialog isOpen={true} >
@@ -62,10 +77,18 @@ export const Dailog = ({message, word=[]}) => {
         <p> {word.map((x, index) => (
             <span key={index}>{x}</span>
             ))}
-        </p>
-        <button style={buttonStyle} onClick={handleRefresh}>
-            Play Again
-        </button>
+        </p>        
+        <div>
+          <button style={buttonStyle} onClick={onK} tabIndex={0}>
+              Challenge Peers
+          </button>
+        </div>
+        <div style={{marginTop:"16px"}}>
+          <button style={buttonStyle} onClick={handleRefresh} tabIndex={0}>
+              Play Again
+          </button>
+        </div>
+        
       </OverlayDialog>
     </div>
   );
