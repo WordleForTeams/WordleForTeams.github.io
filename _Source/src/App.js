@@ -64,7 +64,7 @@ function App() {
     {help && <Help close={()=>isHelp(!help)}/>}
     {end && <Dailog message='You Win !' m={1} word={quest}/>}
     {current>tries && !end && <Dailog message='You Loose !' m={2} word={quest}/>}
-    {!help && <>
+    {!help && !end && <>
       <Row nums={1} current={current} moveNext={moveNext} setUsed={updateUsed} quest={quest}/>
       <Row nums={2} current={current} moveNext={moveNext} setUsed={updateUsed} quest={quest}/>
       <Row nums={3} current={current} moveNext={moveNext} setUsed={updateUsed} quest={quest}/>
