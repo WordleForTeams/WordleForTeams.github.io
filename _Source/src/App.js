@@ -16,7 +16,7 @@ function App() {
   const [help, isHelp] = useState(false)
   const tries = 6
   
-  useEffect(()=>{  microsoftTeams.initialize(); setQuest(getWord(randomIndex))},[])
+  //useEffect(()=>{  microsoftTeams.initialize(); setQuest(getWord(randomIndex))},[])
 
   const [used, setUsed] = useState(
     () => {
@@ -64,7 +64,7 @@ function App() {
     {help && <Help close={()=>isHelp(!help)}/>}
     {end && <Dailog message='You Win !' m={1} word={quest}/>}
     {current>tries && !end && <Dailog message='You Loose !' m={2} word={quest}/>}
-    {!help && !end && <>
+    {(!(current>tries ) && !help) ? <>
       <Row nums={1} current={current} moveNext={moveNext} setUsed={updateUsed} quest={quest}/>
       <Row nums={2} current={current} moveNext={moveNext} setUsed={updateUsed} quest={quest}/>
       <Row nums={3} current={current} moveNext={moveNext} setUsed={updateUsed} quest={quest}/>
@@ -73,7 +73,7 @@ function App() {
       <Row nums={6} current={current} moveNext={moveNext} setUsed={updateUsed} quest={quest}/>
       <Keyboard usedLetters={used}/>
       <h3 style={{color: '#FFF', cursor:"pointer"}} onClick={()=>isHelp(!help)}><u>How to Play</u></h3>
-    </>}
+    </> : <></>}
     </div>
   )
 
