@@ -16,7 +16,7 @@ function App() {
   const [help, isHelp] = useState(false)
   const tries = 6
   
-  //useEffect(()=>{  microsoftTeams.initialize(); setQuest(getWord(randomIndex))},[])
+  useEffect(()=>{  microsoftTeams.initialize(); setQuest(getWord(randomIndex))},[])
 
   const [used, setUsed] = useState(
     () => {
